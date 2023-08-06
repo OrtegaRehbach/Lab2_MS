@@ -11,7 +11,7 @@ def aritmethic_media(n: int) -> float:
     r = 0
     for i in range(1, n + 1):\
         # representar distribucion uniforme en el intervalo de (0, 1)
-        x = numpy.mean(numpy.random.randint(0, 2, i))
+        x = numpy.mean(numpy.random.randint(-40, 40, i))
         r += x
     return (1 / n) * r
 
@@ -20,12 +20,11 @@ def central_means(n: int, s_n: int, mean = 0, variance = 1) -> float:
 
 def plotting_all_means(means : list, N : list):
     k = 0
-
-    # plotting all the means in one figure
+    # graficar todos los promedio en una sola figura
     fig, ax = plt.subplots(2, 2, figsize =(8, 8))
     for i in range(0, 2):
         for j in range(0, 2):
-            # Histogram for each x stored in means
+            # Histograma por cada x alamenado en los promedios
             ax[i, j].hist(means[k], 10, density = True)
             ax[i, j].set_title(label = N[k])
             k = k + 1
@@ -44,11 +43,8 @@ if __name__ == "__main__":
         means = []        
         for e in range(0, N_element):
             for i in n:
-                # print(f'==> {i}')
                 s_n = aritmethic_media(i)
-                # print(f'Media aritmetica: {s_n}')
                 c_m = central_means(i, s_n)
-                # print(f'Central means: {c_m}\n')
                 means.append(c_m)
         print(f"Se guardo un elemente desde {N_element} para means")
         N_means.append(means)
