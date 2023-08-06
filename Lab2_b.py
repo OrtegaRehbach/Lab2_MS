@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 # 1) Genere n valores independientes al azar y calcule la media aritmética
 def aritmethic_media(n: int) -> float:
     r = 0
-    for i in range(1, n + 1):\
-        # representar distribucion uniforme en el intervalo de (0, 1)
+    for i in range(1, n + 1):
         x = numpy.mean(numpy.random.randint(-40, 40, i))
         r += x
     return (1 / n) * r
