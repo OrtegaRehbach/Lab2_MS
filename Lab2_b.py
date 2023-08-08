@@ -5,7 +5,7 @@
 
 import numpy
 import matplotlib.pyplot as plt
-
+from scipy.stats import norm 
 # 1) Genere n valores independientes al azar y calcule la media aritmética
 def aritmethic_media(n: int) -> float:
     r = 0
@@ -44,8 +44,30 @@ def plot_cdfs (means: list, N: list):
             ax[i, j].set_title(label = N[k])
             k = k + 1
     plt.savefig("lab2b_2.png") # Guarda la figura en png, por si plt.show rippea
-    plt.show()
+    #plt.show()
  
+
+# Función para plotear histograma y función de densidad normal
+def plot_histogram_with_normal(means: list, N: list):
+    k = 0
+    fig, ax = plt.subplots(2, 2, figsize=(8, 8))
+    for i in range(0, 2):
+        for j in range(0, 2):
+            # Histograma por cada x almacenado en los promedios
+            ax[i, j].hist(means[k], bins=20, density=True, alpha=0.6)
+            ax[i, j].set_title(label=N[k])
+
+            # Agregamos la función de densidad normal estándar en la misma gráfica
+            x_vals = numpy.linspace(min(means[k]), max(means[k]), 100)
+            y_vals = norm.pdf(x_vals, loc=0, scale=1)
+            ax[i, j].plot(x_vals, y_vals, color='red', linewidth=2)
+
+            k = k + 1
+    plt.savefig("histogram_with_normal.png")
+    #plt.show()  # Ahora debería mostrar la figura correctamente
+    #plt.show()
+
+
 
 if __name__ == "__main__":
     print("Lab 2.b")
@@ -67,7 +89,8 @@ if __name__ == "__main__":
         N_means.append(means)
         
     # 3) Elabore un histograma de estos N valores
-    plotting_all_means(N_means, N)
+    #plotting_all_means(N_means, N)
+    plot_histogram_with_normal(N_means, N)
     # 4) Elabore una grafica de frecuencia relativa acumulada
     plot_cdfs(N_means, N)
 
