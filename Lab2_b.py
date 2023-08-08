@@ -27,7 +27,25 @@ def plotting_all_means(means : list, N : list):
             ax[i, j].hist(means[k], 10, density = True)
             ax[i, j].set_title(label = N[k])
             k = k + 1
+    plt.savefig("lab2b.png") # Guarda la figura en png, por si plt.show rippea
     plt.show()
+
+def plot_cdfs (means: list, N: list):
+    k = 0
+    fig, ax = plt.subplots(2, 2, figsize =(8, 8))
+    for i in range(0, 2):
+        for j in range(0, 2):
+            # Funcion de distribucion empirica
+            # ax[i, j].ecdf(means[k]) # Posible en matplotlib 3.8
+            x = numpy.sort(means[k])
+            y = numpy.linspace(0, 1, len(means[k]), endpoint=False)
+            ax[i, j].plot(x, y)
+            ax[i, j].hist(x, density=True, cumulative=True, histtype='step', alpha=0.8)
+            ax[i, j].set_title(label = N[k])
+            k = k + 1
+    plt.savefig("lab2b_2.png") # Guarda la figura en png, por si plt.show rippea
+    plt.show()
+ 
 
 if __name__ == "__main__":
     print("Lab 2.b")
@@ -45,10 +63,12 @@ if __name__ == "__main__":
                 s_n = aritmethic_media(i)
                 c_m = central_means(i, s_n)
                 means.append(c_m)
-        print(f"Se guardo un elemente desde {N_element} para means")
+        print(f"Se guardo un elemento desde {N_element} para means")
         N_means.append(means)
         
     # 3) Elabore un histograma de estos N valores
     plotting_all_means(N_means, N)
+    # 4) Elabore una grafica de frecuencia relativa acumulada
+    plot_cdfs(N_means, N)
 
     print("END")
