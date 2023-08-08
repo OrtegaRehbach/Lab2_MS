@@ -27,6 +27,7 @@ def plotting_all_means(means : list, N : list):
             ax[i, j].hist(means[k], 10, density = True)
             ax[i, j].set_title(label = N[k])
             k = k + 1
+    plt.savefig("lab2b.png") # Guarda la figura en png, por si plt.show rippea
     plt.show()
 
 if __name__ == "__main__":
@@ -45,7 +46,7 @@ if __name__ == "__main__":
                 s_n = aritmethic_media(i)
                 c_m = central_means(i, s_n)
                 means.append(c_m)
-        print(f"Se guardo un elemente desde {N_element} para means")
+        print(f"Se guardo un elemento desde {N_element} para means")
         N_means.append(means)
         
     # 3) Elabore un histograma de estos N valores
